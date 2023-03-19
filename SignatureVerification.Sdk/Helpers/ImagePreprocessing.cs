@@ -6,7 +6,7 @@ using SixLabors.ImageSharp.Processing;
 
 namespace SignatureVerificationSdk.Helpers
 {
-    internal static class ImagePreprocessing
+    public static class ImagePreprocessing
     {
         #region Calculate Otsu threshold
         /// <summary>
@@ -93,7 +93,7 @@ namespace SignatureVerificationSdk.Helpers
         /// <param name="image">Input image</param>
         /// <param name="otsuThreshold">Otsu threshold</param>
         /// <returns></returns>
-        internal static (Point CenterOfMass, Rectangle MinumumArea) CalculateMassInfo(this Image<L8> image,
+        public static (Point CenterOfMass, Rectangle MinumumArea) CalculateMassInfo(this Image<L8> image,
             int otsuThreshold)
         {
             var minX = image.Width;
@@ -168,20 +168,35 @@ namespace SignatureVerificationSdk.Helpers
         /// <summary>
         /// Preprocess image to pass to validation
         /// </summary>
-        /// <param name="inputStream">Input image</param>
+        /// <param name="inputStream">Input image as stream</param>
+        /// <param name="inputSize">Size of the output image</param>
+        /// <param name="imageSize">Image size</param>
+        /// <param name="canvasSize">Internal resize image size</param>
+        /// <returns>Preprocessed image</returns>
+        public static Image<L8> PreprocessImage(this Stream inputStream, Size inputSize, Size imageSize,
+            Size canvasSize)
+        {
+            var inputImage = Image.Load<Rgb24>(inputStream);
+
+            return PreprocessImage(inputImage, inputSize, imageSize, canvasSize);
+        }
+
+        /// <summary>
+        /// Preprocess image to pass to validation
+        /// </summary>
+        /// <param name="inputImage">Input image</param>
         /// <param name="inputSize">Size of the output image</param>
         /// <param name="imageSize">Image size</param>
         /// <param name="canvasSize">Internal resize image size</param>
         /// <returns>Preprocessed image</returns>
         /// <exception cref="Exception"></exception>
-        internal static Image<L8> PreprocessImage(this Stream inputStream, Size inputSize, Size imageSize,
+        public static Image<L8> PreprocessImage(this Image<Rgb24> inputImage, Size inputSize, Size imageSize,
             Size canvasSize)
         {
 
             #region Grayscale image
 
-            var grayscaleImage = Image
-                .Load<Rgb24>(inputStream)
+            var grayscaleImage = inputImage
                 .ConvertToGrayscale();
 
             #endregion
@@ -308,7 +323,6 @@ namespace SignatureVerificationSdk.Helpers
                     .Resize((int)resizeWidth, (int)resizeHeight)
                     .Crop(cropRectangle)
             );
-
             #endregion
 
             #region Crop image to center and resize to inputSize
