@@ -20,12 +20,12 @@ Return images have 224x224 size.
 Below some examples:
 
 #### First example
-![Original signature image](images/001_01.png "Original signature image")
-![Cleaned signature image](support-images/001_01-cleaned.png "Cleaned signature image")
+![Original signature image](SignatureVerification.Console/Images/001_01.png "Original signature image")
+![Cleaned signature image](SignatureVerification.Console/support-images/001_01-cleaned.png "Cleaned signature image")
 
 #### Second example
-![Original signature image](images/001_forg_00.png "Original signature image")
-![Cleaned signature image](support-images/001_forg_00-cleaned.png "Cleaned signature image")
+![Original signature image](SignatureVerification.Console/Images/001_forg_00.png "Original signature image")
+![Cleaned signature image](SignatureVerification.Console/support-images/001_forg_00-cleaned.png "Cleaned signature image")
 
 ### To verify signatures
 - Use the `SignatureVerifier` class to verify signatures.
