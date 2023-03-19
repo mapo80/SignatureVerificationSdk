@@ -1,7 +1,6 @@
 ﻿## Why this project
-I want to method to verify if an handwritten signature is genuine or forged.
-I've googled a lot and found some papers about this topic, but I'm not sure if they are the best way to do it.
-
+I want a method to verify if an handwritten signature is genuine or forged.
+I've googled a lot and found some papers about this topic.
 I've found many papers and finally I've found these two projects on Kaggle:
 - Signature Image Cleaning with Tensorflow 2.0 - https://www.kaggle.com/code/victordibia/signature-image-cleaning-with-tensorflow-2-0
 - Siamese signature verification with confidence - https://www.kaggle.com/code/medali1992/siamese-signature-verification-with-confidence
